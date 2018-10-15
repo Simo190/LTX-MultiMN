@@ -194,7 +194,7 @@ let COUNTER=COUNTER+IP6COUNT
   mv ~/.ltx_${ALIAS}/ltxd.pid ~/.ltx_${ALIAS}/ltxd${ALIAS}.pid
   echo "Your ip is [${gateway}$COUNTER]"
   COUNTER=$((COUNTER+1))done
-fi
+
 
 ## Final echos
 echo ""
