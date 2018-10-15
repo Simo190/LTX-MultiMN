@@ -48,8 +48,8 @@ fi
   wget https://github.com/Simo190/LTX-MultiMN/releases/download/Daemon/Linux.zip
  fi
   unzip Linux.zip
-  chmod +x Linux/bin/*
-  sudo mv  Linux/bin/* /usr/local/bin
+  chmod +x Linux/*
+  sudo mv  Linux/* /usr/local/bin
   rm -rf Linux.zip Windows Linux Mac
 
   sudo apt-get install -y ufw
@@ -204,6 +204,5 @@ echo "ALIAS_status"
 echo "ALIAS_stop"
 echo "ALIAS_config"
 echo "ALIAS_getinfo"
-perl -i -ne 'print if ! $a{$_}++' /etc/monit/monitrc
 exec bash
 exit
