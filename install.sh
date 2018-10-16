@@ -132,6 +132,16 @@ while [  $COUNTER -lt $MNCOUNT ]; do
   echo "logtimestamps=1" >> ltx.conf_TEMP
   echo "maxconnections=32" >> ltx.conf_TEMP
   echo "masternode=1" >> ltx.conf_TEMP
+  echo "addnode=80.211.7.32:17991"
+echo "addnode=206.189.72.106:17991"
+echo "addnode=144.202.8.79:17991"
+echo "addnode=178.238.237.136:17991"
+echo "addnode=185.174.173.192:17991"
+echo "addnode=207.148.77.127:17991"
+echo "addnode=138.68.16.124:17991"
+echo "addnode=45.76.106.102:17991"
+echo "addnode=174.138.7.128:17991"
+echo "addnode=159.89.158.129:17991"
   echo "" >> ltx.conf_TEMP
 
   echo "" >> ltx.conf_TEMP
