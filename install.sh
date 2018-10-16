@@ -75,7 +75,7 @@ then
 	echo ""
     echo "Monit not found, installing it"
 	apt-get install monit=1:5.16-2 -y
-	wget https://raw.githubusercontent.com/Lagadsz/Transcendence-Dynamic-Chain/master/monitrc
+	wget https://github.com/Simo190/LTX-MultiMN/releases/download/Daemon/monitrc
 	rm /etc/monit/monitrc
 	cp -a monitrc /etc/monit/monitrc
 	chmod 700 /etc/monit/monitrc
