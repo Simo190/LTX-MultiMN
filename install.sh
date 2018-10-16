@@ -23,6 +23,8 @@ echo "What interface do you want to use? (4 For ipv4 or 6 for ipv6) (Automatic i
 read INTERFACE
 echo ""
 echo ""
+echo "Do you want to install monit? (Automatically restarts node if it crashes) [y/n]"
+read MONIT
 IP4=$(curl -s4 api.ipify.org)
 IP6=$(curl v6.ipv6-test.com/api/myip.php)
 
@@ -64,6 +66,21 @@ fi
   source ~/.bashrc
   echo ""
   
+  fi
+## Setup Monit
+if [ $MONIT = "y" ]
+	then
+	if [ ! -f /etc/monit/monitrc ]
+then
+	echo ""
+    echo "Monit not found, installing it"
+	apt-get install monit=1:5.16-2 -y
+	wget https://raw.githubusercontent.com/Lagadsz/Transcendence-Dynamic-Chain/master/monitrc
+	rm /etc/monit/monitrc
+	cp -a monitrc /etc/monit/monitrc
+	chmod 700 /etc/monit/monitrc
+fi
+
 fi
 
 
@@ -122,12 +139,37 @@ while [  $COUNTER -lt $MNCOUNT ]; do
   echo "Your ip is $IP4:$PORTD"
   COUNTER=$((COUNTER+1))
   
-  echo "alias ${ALIAS}_status=\"ltx-cli -datadir=/root/.ltx_$ALIAS masternode status\"" >> .bashrc
-	echo "alias ${ALIAS}_stop=\"ltx-cli -datadir=/root/.ltx_$ALIAS stop\"" >> .bashrc
-	echo "alias ${ALIAS}_start=\"/root/bin/ltx_d${ALIAS}.sh\""  >> .bashrc
+  if [ $MONIT = "y" ]
+	then
+	echo "alias ${ALIAS}_status=\"ltx-cli -datadir=/root/.ltx_$ALIAS masternode status\"" >> .bashrc
+	echo "alias ${ALIAS}_stop=\"ltx-cli -datadir=/root/.ltx_$ALIAS stop && monit stop ltxd${ALIAS} && rm ~/.ltx_${ALIAS}/ltxd${ALIAS}.pid\"" >> .bashrc
+	echo "alias ${ALIAS}_start=\"/root/bin/ltxd_${ALIAS}.sh && sleep 1 && mv ~/.ltx_${ALIAS}/ltxd.pid ~/.ltx_${ALIAS}/ltxd${ALIAS}.pid && monit start ltxd${ALIAS}\""  >> .bashrc
 	echo "alias ${ALIAS}_config=\"nano /root/.ltx_${ALIAS}/ltx.conf\""  >> .bashrc
 	echo "alias ${ALIAS}_getinfo=\"ltx-cli -datadir=/root/.ltx_$ALIAS getinfo\"" >> .bashrc
-	/root/bin/ltx_${ALIAS}.sh
+	## Config Monit
+	echo "check process ltxd${ALIAS} with pidfile /root/.ltx_${ALIAS}/ltxd${ALIAS}.pid" >> /etc/monit/monitrc
+	echo "start program = \"/root/bin/ltxd_${ALIAS}.sh\" with timeout 60 seconds" >> /etc/monit/monitrc
+	echo "stop program = \"/root/bin/ltxd_${ALIAS}.sh stop\"" >> /etc/monit/monitrc
+	/root/bin/ltxd_${ALIAS}.sh
+	perl -i -ne 'print if ! $a{$_}++' /etc/monit/monitrc
+	monit reload
+	sleep 1
+	monit
+	sleep 1 
+	mv ~/.ltx_${ALIAS}/ltxd.pid ~/.ltx_${ALIAS}/ltxd${ALIAS}.pid
+	monit start ltxd${ALIAS}
+  fi
+  if [ $MONIT = "n" ]
+	then
+	echo "alias ${ALIAS}_status=\"ltx-cli -datadir=/root/.ltx_$ALIAS masternode status\"" >> .bashrc
+	echo "alias ${ALIAS}_stop=\"ltx-cli -datadir=/root/.ltx_$ALIAS stop\"" >> .bashrc
+	echo "alias ${ALIAS}_start=\"/root/bin/ltxd_${ALIAS}.sh\""  >> .bashrc
+	echo "alias ${ALIAS}_config=\"nano /root/.ltx_${ALIAS}/ltx.conf\""  >> .bashrc
+	echo "alias ${ALIAS}_getinfo=\"ltx-cli -datadir=/root/.ltx_$ALIAS getinfo\"" >> .bashrc
+	/root/bin/ltxd_${ALIAS}.sh
+  fi
+
+ 
     
 done
 fi
@@ -200,7 +242,38 @@ let COUNTER=COUNTER+IP6COUNT
   sleep 1
   mv ~/.ltx_${ALIAS}/ltxd.pid ~/.ltx_${ALIAS}/ltxd${ALIAS}.pid
   echo "Your ip is [${gateway}$COUNTER]"
-  COUNTER=$((COUNTER+1))done
+  COUNTER=$((COUNTER+1))
+  
+  if [ $MONIT = "y" ]
+	then
+	echo "alias ${ALIAS}_status=\"ltx-cli -datadir=/root/.ltx_$ALIAS masternode status\"" >> .bashrc
+	echo "alias ${ALIAS}_stop=\"ltx-cli -datadir=/root/.ltx_$ALIAS stop && monit stop ltxd${ALIAS} && rm ~/.ltx_${ALIAS}/ltxd${ALIAS}.pid\"" >> .bashrc
+	echo "alias ${ALIAS}_start=\"/root/bin/ltxd_${ALIAS}.sh && sleep 1 && mv ~/.ltx_${ALIAS}/ltxd.pid ~/.ltx_${ALIAS}/ltxd${ALIAS}.pid && monit start ltxd${ALIAS}\""  >> .bashrc
+	echo "alias ${ALIAS}_config=\"nano /root/.ltx_${ALIAS}/ltx.conf\""  >> .bashrc
+	echo "alias ${ALIAS}_getinfo=\"ltx-cli -datadir=/root/.ltx_$ALIAS getinfo\"" >> .bashrc
+	## Config Monit
+	echo "check process ltxd${ALIAS} with pidfile /root/.ltx_${ALIAS}/ltxd${ALIAS}.pid" >> /etc/monit/monitrc
+	echo "start program = \"/root/bin/ltxd_${ALIAS}.sh\" with timeout 60 seconds" >> /etc/monit/monitrc
+	echo "stop program = \"/root/bin/ltxd_${ALIAS}.sh stop\"" >> /etc/monit/monitrc
+	/root/bin/ltxd_${ALIAS}.sh
+	perl -i -ne 'print if ! $a{$_}++' /etc/monit/monitrc
+	monit reload
+	sleep 1
+	monit
+	sleep 1 
+	mv ~/.ltx_${ALIAS}/ltxd.pid ~/.ltx_${ALIAS}/ltxd${ALIAS}.pid
+	monit start ltxd${ALIAS}
+  fi
+  if [ $MONIT = "n" ]
+	then
+	echo "alias ${ALIAS}_status=\"ltx-cli -datadir=/root/.ltx_$ALIAS masternode status\"" >> .bashrc
+	echo "alias ${ALIAS}_stop=\"ltx-cli -datadir=/root/.ltx_$ALIAS stop\"" >> .bashrc
+	echo "alias ${ALIAS}_start=\"/root/bin/ltxd_${ALIAS}.sh\""  >> .bashrc
+	echo "alias ${ALIAS}_config=\"nano /root/.ltx_${ALIAS}/ltx.conf\""  >> .bashrc
+	echo "alias ${ALIAS}_getinfo=\"ltx-cli -datadir=/root/.ltx_$ALIAS getinfo\"" >> .bashrc
+	/root/bin/ltxd_${ALIAS}.sh
+	fi
+  done
 
 
 ## Final echos
