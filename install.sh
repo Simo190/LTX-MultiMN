@@ -121,6 +121,13 @@ while [  $COUNTER -lt $MNCOUNT ]; do
   mv ltx.conf_TEMP $CONF_DIR/ltx.conf 
   echo "Your ip is $IP4:$PORTD"
   COUNTER=$((COUNTER+1))
+  
+  echo "alias ${ALIAS}_status=\"ltx-cli -datadir=/root/.ltx_$ALIAS masternode status\"" >> .bashrc
+	echo "alias ${ALIAS}_stop=\"ltx-cli -datadir=/root/.ltx_$ALIAS stop\"" >> .bashrc
+	echo "alias ${ALIAS}_start=\"/root/bin/ltx_d${ALIAS}.sh\""  >> .bashrc
+	echo "alias ${ALIAS}_config=\"nano /root/.ltx_${ALIAS}/ltx.conf\""  >> .bashrc
+	echo "alias ${ALIAS}_getinfo=\"ltx-cli -datadir=/root/.ltx_$ALIAS getinfo\"" >> .bashrc
+	/root/bin/ltx_${ALIAS}.sh
     
 done
 fi
