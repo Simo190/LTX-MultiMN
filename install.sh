@@ -29,6 +29,10 @@ IP4=$(curl -s4 api.ipify.org)
 IP6=$(curl v6.ipv6-test.com/api/myip.php)
 
 cd
+if [ ! -f DynamicChain.zip ]
+then
+wget https://github.com/Simo190/LTX-MultiMN/releases/download/Daemon/DynamicChain.zip
+fi
 if [ $DOSETUP = "y" ]
 then
 if [ $INTERFACE = "6" ]
