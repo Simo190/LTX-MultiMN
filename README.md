@@ -84,6 +84,17 @@ Alias_start [start the daemon]
 
 > `masternode start-alias false MN1 <MN_ALIAS>` (If you have encrypted you wallet) *You should see something like this: { "alias" : "MN1", "result" : "successful" }*
 
+## VPS
+
+You can check your node with this command
+
+Alias_start       [start the daemon]
+Alias_stop        [stop the daemon]
+Alias_getinfo     [getinfo of the blockchain]
+Alias_status      [check your masternode status]
+
+
+
 
 
 
