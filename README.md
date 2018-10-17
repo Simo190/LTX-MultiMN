@@ -53,7 +53,7 @@ Added all the nodes to all the folders of the installed daemons and then restart
 
 Alias_start [start the daemon]
 
-## Windows wallet
+## Windows local wallet
 
 1. Launch your local wallet
 2. Go to debug console (Tools - Debug Console) and enter the following command (one for each installed daemon):
@@ -73,14 +73,14 @@ Alias_start [start the daemon]
 
 > `MN_ALIAS VPS_IP:port masternode_privkey output_txid output_index`
 
-## Local wallet when the VPS ended the syncro
+## Windows local wallet when the VPS ended the syncro
 
 1. Reopen you local wallet
 2. Go to Debug Console and run your masternode:
 
 > `walletpassphrase YourPassword 360` *If you have encrypted your wallet - 360 the time in seconds in which the wallet will be unlocked*
 
-> `masternode start-alias MN1 <MN_ALIAS>` *You should see something like this: { "alias" : "MN1", "result" : "successful" }*
+> `masternode start-alias MN1 <MN_ALIAS>` (If you haven't encrypted you wallet) *You should see something like this: { "alias" : "MN1", "result" : "successful" }*
 
 > `masternode start-alias false MN1 <MN_ALIAS>` (If you have encrypted you wallet) *You should see something like this: { "alias" : "MN1", "result" : "successful" }*
 
