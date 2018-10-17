@@ -89,8 +89,11 @@ Alias_start [start the daemon]
 You can check your node with this command
 
 Alias_start       [start the daemon]
+
 Alias_stop        [stop the daemon]
+
 Alias_getinfo     [getinfo of the blockchain]
+
 Alias_status      [check your masternode status]
 
 
