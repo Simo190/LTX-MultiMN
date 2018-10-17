@@ -26,14 +26,23 @@ nano ltx.conf [edit the ltx.conf file]
 
 This is the line to past in you ltx.conf
 addnode=80.211.7.32:17991
+
 addnode=206.189.72.106:17991
+
 addnode=144.202.8.79:17991
+
 addnode=178.238.237.136:17991
+
 addnode=185.174.173.192:17991
+
 addnode=207.148.77.127:17991
+
 addnode=138.68.16.124:17991
+
 addnode=45.76.106.102:17991
+
 addnode=174.138.7.128:17991
+
 addnode=159.89.158.129:17991
 
 
@@ -46,16 +55,16 @@ Alias_start [start the daemon]
 ## Windows wallet
 
 1. Launch your local wallet
-2. Go to debug console (Tools - Debug Console) and enter the following command:
+2. Go to debug console (Tools - Debug Console) and enter the following command (one for each installed daemon):
 
 > `masternode genkey` *save the result (masternode_privkey)*
 
-3. Enter the following command: 
+3. Enter the following command (one for each installed daemon): 
 
 > `getaccountaddress MN1` *you will get new Masternode wallet address. Use like MN1 or other to better remeber and check your Masternode*
 
 4. Send 10,000 LTX to Masternode wallet address.
-5. Enter the following command: 
+5. Enter the following command (one for each transaction): 
 
 > `masternode outputs` output_txid
 
@@ -63,7 +72,16 @@ Alias_start [start the daemon]
 
 > `MN_ALIAS VPS_IP:port masternode_privkey output_txid output_index`
 
+## Local wallet when the VPS ended the syncro
 
+1. Reopen you local wallet
+2. Go to Debug Console and run your masternode:
+
+> `walletpassphrase YourPassword 360` *If you have encrypted your wallet - 360 the time in seconds in which the wallet will be unlocked*
+
+> `masternode start-alias MN1 <MN_ALIAS>` *You should see something like this: { "alias" : "MN1", "result" : "successful" }*
+
+> `masternode start-alias false MN1 <MN_ALIAS>` (If you have encrypted you wallet) *You should see something like this: { "alias" : "MN1", "result" : "successful" }*
 
 
 
