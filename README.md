@@ -80,9 +80,10 @@ Alias_start [start the daemon]
 
 > `walletpassphrase YourPassword 360` *If you have encrypted your wallet - 360 the time in seconds in which the wallet will be unlocked*
 
-> `masternode start-alias MN1 <MN_ALIAS>` (If you haven't encrypted you wallet) *You should see something like this: { "alias" : "MN1", "result" : "successful" }*
-
 > `masternode start-alias false MN1 <MN_ALIAS>` (If you have encrypted you wallet) *You should see something like this: { "alias" : "MN1", "result" : "successful" }*
+
+
+> `masternode start-alias MN1 <MN_ALIAS>` (If you haven't encrypted you wallet) *You should see something like this: { "alias" : "MN1", "result" : "successful" }*
 
 ## VPS
 
