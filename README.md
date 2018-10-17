@@ -49,7 +49,7 @@ addnode=159.89.158.129:17991
 
 Pasted the nodes press control + O and then send control + X [save and exit]
 
-Added all the nodes to all the daemons installed to restart all daemons
+Added all the nodes to all the folders of the installed daemons and then restart all daemons
 
 Alias_start [start the daemon]
 
