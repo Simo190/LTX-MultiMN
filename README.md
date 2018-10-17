@@ -25,6 +25,7 @@ cd .ltx_Alias [enter the relative folder]
 nano ltx.conf [edit the ltx.conf file]
 
 This is the line to past in you ltx.conf
+
 addnode=80.211.7.32:17991
 
 addnode=206.189.72.106:17991
