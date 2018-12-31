@@ -1,7 +1,7 @@
 # LTX-MultiMN
 LTX MultiMasternode 1 VPS
 
-Shell script to install a [LITEX Masternode](https://ltxcoin.info) on a Linux server running Ubuntu 16.04. Use it on your own risk.
+Shell script to install a [LITEX Masternode](https://litexcoin.online) on a Linux server running Ubuntu 16.04. Use it on your own risk.
 
 
 Type this command in your VPS
