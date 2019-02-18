@@ -215,7 +215,6 @@ let COUNTER=COUNTER+IP6COUNT
   read PRIVKEY
   mkdir ~/.ltx_$ALIAS
   unzip DynamicChain.zip -d ~/.ltx_$ALIAS
-  rm -r DynamicChain.zip -d ~/.ltx_$ALIAS
   echo '#!/bin/bash' > ~/bin/ltxd_$ALIAS.sh
   echo "ltxd -daemon -conf=$CONF_DIR/ltx.conf -datadir=$CONF_DIR "'$*' >> ~/bin/ltxd_$ALIAS.sh
   echo '#!/bin/bash' > ~/bin/ltx-cli_$ALIAS.sh
